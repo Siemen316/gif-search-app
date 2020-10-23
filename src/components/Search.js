@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import './search.css';
 import { ImSearch } from 'react-icons/im';
 import { MainContext } from '../MainContext';
 const Search = () => {

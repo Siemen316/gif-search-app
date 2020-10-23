@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import '../nav.css';
+import React, { useContext, useState } from 'react';
 import { GiFlame } from 'react-icons/gi';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { CgDarkMode } from 'react-icons/cg';
+import { MainContext } from '../MainContext';
 const NavBar = () => {
+  const { handleTheme } = useContext(MainContext);
   const [toggle, setToggle] = useState(true);
+  console.log(handleTheme);
+
   return (
     <nav>
       <header>
@@ -27,6 +31,9 @@ const NavBar = () => {
           <li>
             <a href="#m">MORE</a>{' '}
           </li>
+          <button className="btn2" onClick={handleTheme}>
+            <CgDarkMode className="dark" />
+          </button>
         </ul>
       </div>
     </nav>

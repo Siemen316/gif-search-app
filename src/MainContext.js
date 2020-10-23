@@ -14,6 +14,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 const MainContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [theme, setTheme] = useState('dark-theme');
   const [query, setQuery] = useState('city');
   const [limit, setLimit] = useState('5');
 
@@ -38,8 +39,14 @@ const MainContextProvider = ({ children }) => {
     setLimit(selectVal);
   };
 
+  const handleTheme = () => {
+    theme === 'light-theme' ? setTheme('dark-theme') : setTheme('light-theme');
+  };
+
   return (
-    <MainContext.Provider value={{ ...state, handleQuery, handleLimit, query }}>
+    <MainContext.Provider
+      value={{ ...state, handleQuery, handleLimit, query, handleTheme, theme }}
+    >
       {children}
     </MainContext.Provider>
   );
