@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import './App.css';
 import Main from './components/Main';
 import NavBar from './components/NavBar';
 import Search from './components/Search';
