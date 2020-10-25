@@ -6,6 +6,10 @@ const reducer = (state, action) => {
       return { ...state, isLoading: false, gifs: action.payload };
     case 'ERROR':
       return { ...state, error: true, isLoading: false };
+    case 'HANDLE_QUERY':
+      return { ...state, query: action.setValue };
+    case 'HANDLE_DROPDOWN':
+      return { ...state, limit: action.setNumValue };
 
     default:
       return state;

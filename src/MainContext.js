@@ -8,6 +8,8 @@ const initialState = {
   isLoading: true,
   error: false,
   gifs: [],
+  query: 'city',
+  limit: '5',
 };
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -15,13 +17,11 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 const MainContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [theme, setTheme] = useState('dark-theme');
-  const [query, setQuery] = useState('city');
-  const [limit, setLimit] = useState('5');
 
   useEffect(() => {
     dispatch({ type: 'LOADING' });
     Axios.get(
-      `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=${limit}&rating=r`
+      `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${state.query}&limit=${state.limit}&rating=r`
     )
       .then((res) => {
         dispatch({ type: 'FETCH_SUCCESS', payload: res.data.data });
@@ -29,15 +29,7 @@ const MainContextProvider = ({ children }) => {
       .catch((err) => {
         dispatch({ type: 'ERROR' });
       });
-  }, [query, limit]);
-
-  const handleQuery = (value) => {
-    setQuery(value);
-  };
-
-  const handleLimit = (selectVal) => {
-    setLimit(selectVal);
-  };
+  }, [state.query, state.limit]);
 
   const handleTheme = () => {
     theme === 'light-theme' ? setTheme('dark-theme') : setTheme('light-theme');
@@ -45,7 +37,12 @@ const MainContextProvider = ({ children }) => {
 
   return (
     <MainContext.Provider
-      value={{ ...state, handleQuery, handleLimit, query, handleTheme, theme }}
+      value={{
+        ...state,
+        handleTheme,
+        theme,
+        dispatch,
+      }}
     >
       {children}
     </MainContext.Provider>

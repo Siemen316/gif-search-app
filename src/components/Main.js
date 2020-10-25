@@ -56,9 +56,6 @@ const Main = () => {
             </div>
             <h1 className="gif-title">{gifs[index].title}</h1>
           </main>
-          <p className="powered">
-            Powered by <a href="https://giphy.com/"> GIPHY</a>
-          </p>
         </>
       )}
     </div>

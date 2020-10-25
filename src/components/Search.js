@@ -2,19 +2,26 @@ import React, { useContext, useState } from 'react';
 import { ImSearch } from 'react-icons/im';
 import { MainContext } from '../MainContext';
 const Search = () => {
-  const { handleQuery, handleLimit } = useContext(MainContext);
+  const { dispatch } = useContext(MainContext);
 
   const [value, setValue] = useState('');
   const [selectVal, setSelectVal] = useState('5');
 
+  const handleQuery = (value) => {
+    dispatch({ type: 'HANDLE_QUERY', setValue: value });
+  };
+
+  const handleLimit = (numValue) => {
+    dispatch({ type: 'HANDLE_DROPDOWN', setNumValue: numValue });
+  };
+
   const handleSubmit = (e) => {
-    console.log(selectVal);
     setValue('');
     e.preventDefault();
     if (value) {
       handleQuery(value);
       handleLimit(selectVal);
-    } else alert('');
+    } else alert('PLEASE FILL OUT THE SEARCH FIELD!');
   };
 
   return (

@@ -6,6 +6,10 @@ import { MainContext } from './MainContext';
 
 function App() {
   const { theme } = useContext(MainContext);
+  console.log(
+    '%c DANGER ZONE!!',
+    'font-weight: bold; font-size: 50px;color: red;'
+  );
 
   useEffect(() => {
     document.documentElement.className = theme;
